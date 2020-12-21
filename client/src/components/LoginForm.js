@@ -2,10 +2,14 @@
 import React, { useState } from 'react';
 import { Form, Button, Alert } from 'react-bootstrap';
 
-import { loginUser } from '../utils/API';
+// import { loginUser } from '../utils/API';
 import Auth from '../utils/auth';
 
+import { LOGIN_USER } from '../utils/mutations';
+import { useMutation } from '@apollo/react-hooks';
+
 const LoginForm = () => {
+  const [loginUser] = useMutation(LOGIN_USER);
   const [userFormData, setUserFormData] = useState({ email: '', password: '' });
   const [validated] = useState(false);
   const [showAlert, setShowAlert] = useState(false);
@@ -29,7 +33,7 @@ const LoginForm = () => {
       const response = await loginUser(userFormData);
 
       if (!response.ok) {
-        throw new Error('something went wrong!');
+        throw new Error('Something went wrong!');
       }
 
       const { token, user } = await response.json();
@@ -61,6 +65,7 @@ const LoginForm = () => {
             name='email'
             onChange={handleInputChange}
             value={userFormData.email}
+            autoComplete="on"
             required
           />
           <Form.Control.Feedback type='invalid'>Email is required!</Form.Control.Feedback>
@@ -74,6 +79,7 @@ const LoginForm = () => {
             name='password'
             onChange={handleInputChange}
             value={userFormData.password}
+            autoComplete="on"
             required
           />
           <Form.Control.Feedback type='invalid'>Password is required!</Form.Control.Feedback>
