@@ -38,6 +38,10 @@
  - React
  - Node.js
 
+ ## Screenshot
+
+ ![Screenshot](./assets/screenshot.png)
+
   ---
   ## Questions?
   _Contact me:_
